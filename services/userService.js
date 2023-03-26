@@ -29,6 +29,9 @@ class User {
       message: `Deleted element with id ${id}`
     };
   }
+  error() {
+    throw new Error('ups');
+  }
 }
 
 module.exports = User;
