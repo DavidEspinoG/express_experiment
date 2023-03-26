@@ -1,6 +1,6 @@
 const User = require('../services/userService');
 const user = new User;
-
+const { postUserValidation } = require('../validation');
 
 function routerApi (app) {
   app.get('/', (req, res) => {
@@ -14,7 +14,16 @@ function routerApi (app) {
     res.json(user.getOne(req.params.id))
   })
   
-  app.post('/users', (req, res) => {
+  app.post('/users', 
+    (req, res, next) => {
+      const data = req.body;
+      const { error } = postUserValidation.validate(data)
+      if(error){
+        next(error)
+      }
+      next();
+    },
+    (req, res) => {
     res.json(user.add(req.body))
   })
   
