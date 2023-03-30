@@ -9,15 +9,6 @@ app.use(express.json());
 
 routerApi(app);
 
-app.use(function(err, req, res, next) {
-  console.log(err.message)
-  res.status(501)
-  res.json({
-    message: err.message, 
-  })
-  next(err);
-});
-
 app.use(errorHandler);
 
 app.listen(port, () => {
