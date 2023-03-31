@@ -9,7 +9,7 @@ app.use(express.json());
 routerApi(app);
 
 app.use(errorHandler);
-console.log(port)
 app.listen(port, () => {
   console.log('Corriendo desde el puerto: ', port)
+  console.log('Database url:', process.env.DATABASE_URL)
 })
