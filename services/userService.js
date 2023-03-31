@@ -1,3 +1,5 @@
+const db = require('../db/db');
+
 class User {
   constructor() {
     this.users = [];
@@ -10,21 +12,24 @@ class User {
       return Math.max(...indexes) + 1;
     }
   }
-  add(user) {
-    user.id = this.getId();
-    this.users.push(user);
+  async add(user) {
+    const query = `INSERT INTO users (name, mail) VALUES ('${user.name}', '${user.email}')`
+    const newUser = await db.query(query);
     return user;
   }
-  getAll(){
-    return this.users;
+  async getAll() {
+    const results =  await db.query("SELECT * FROM users;")
+    return results;
   }
-  getOne(id){
-    const element = this.users.filter(element => element.id === parseInt(id) );
-    return element;
+  async getOne(id){
+    const query = `SELECT * FROM users WHERE id='${id}';`
+    const user = await db.query(query)
+    console.log(query)
+    return user;
   }
-  delete(id) {
-    const index = this.users.findIndex(element => element.index === id);
-    this.users.splice(index, 1);
+  async delete(id) {
+    const query = `DELETE FROM users WHERE id='${id}'`
+    db.query(query)
     return {
       message: `Deleted element with id ${id}`
     };

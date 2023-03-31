@@ -6,12 +6,13 @@ function routerApi (app) {
   app.get('/', (req, res) => {
     res.send('Welcome to my first API')
   });
-  app.get('/users', (req, res ) => {
-    res.json(user.getAll());
+  app.get('/users', async (req, res ) => {
+    const response = await user.getAll()
+    res.json(response);
   })
   
-  app.get('/users/:id', (req, res) => {
-    res.json(user.getOne(req.params.id))
+  app.get('/users/:id', async (req, res) => {
+    res.json(await user.getOne(req.params.id))
   })
   
   app.post('/users', 
@@ -23,13 +24,13 @@ function routerApi (app) {
       }
       next();
     },
-    (req, res) => {
-    res.json(user.add(req.body))
+    async (req, res) => {
+    res.json(await user.add(req.body))
   })
   
-  app.delete('/users/:id', (req, res) => {
+  app.delete('/users/:id', async (req, res) => {
     const id = req.params.id
-    res.json(user.delete(id));
+    res.json(await user.delete(id));
   })
   app.get('/error', (req, res) => {
     res.json(user.error());
