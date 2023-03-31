@@ -1,5 +1,5 @@
 const pgp = require('pg-promise')();
-const url = process.env.DATABASE_URL || 'postgres://david:admin@localhost:5432/my_db'
+const url = 'postgres://david:nSrfH7GcfGHPz3mRU4PaiWWVmwe4h9Lj@dpg-cgjj5se4dadak46b6nm0-a.oregon-postgres.render.com/daviddata'
 const db = pgp(url);
 
 
