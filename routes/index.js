@@ -4,7 +4,7 @@ const { postUserValidation } = require('../validation');
 
 function routerApi (app) {
   app.get('/', (req, res) => {
-    res.send('Welcome to my first API')
+    res.send('Welcome to  my first API')
   });
   app.get('/users', async (req, res ) => {
     const response = await user.getAll()
